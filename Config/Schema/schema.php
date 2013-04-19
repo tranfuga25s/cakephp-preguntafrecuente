@@ -17,6 +17,8 @@ class AppSchema extends CakeSchema {
 		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
 		'publicado' => array('type' => 'boolean', 'null' => false, 'default' => null),
 		'categoria_id' => array('type' => 'integer', 'null' => false, 'default' => null),
+		'leido' => array( 'type' => 'integer', 'null' => false, 'default' => 0 ),
+		'util' => array( 'type' => 'integer', 'null' => false, 'default' => 0 ),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id_pregunta', 'unique' => 1 )
 		),
