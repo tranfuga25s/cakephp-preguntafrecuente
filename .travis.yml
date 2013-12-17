@@ -5,6 +5,8 @@ php:
 
 before_script:
   - git clone git://github.com/cakephp/cakephp ../cakephp
+  - pwd
+  - ls . -l
   - mv ../cakephp-preguntafrecuente ../cakephp/app/Plugins/PreguntaFrecuente
   - chmod -R 777 ../cakephp/app/tmp
   - sh -c "mysql -e 'CREATE DATABASE cakephp_test;'"
