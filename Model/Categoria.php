@@ -21,18 +21,9 @@ class Categoria extends PreguntaFrecuenteAppModel {
      * @var string
      */
 	public $displayField = 'nombre';
-
-    /**
-     * belongsTo associations
-     *
-     * @var array
-     */
-	public $belongsTo = array(
-		'Padre' => array(
-			'className' => 'PreguntaFrecuente.Categoria',
-			'foreignKey' => 'padre_id',
-		)
-	);
+    
+    
+    public $actsAs = array( 'Tree' );
 
     /**
      * hasMany associations

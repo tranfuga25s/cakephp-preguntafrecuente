@@ -6,6 +6,8 @@ App::uses('PreguntaFrecuenteAppController', 'PreguntaFrecuente.Controller');
  * @property Categoria $Categoria
  */
 class CategoriasController extends PreguntaFrecuenteAppController {
+    
+    public $uses = array( 'PreguntaFrecuente.Categoria' );
 
     /**
      * administracion_index method
@@ -14,7 +16,11 @@ class CategoriasController extends PreguntaFrecuenteAppController {
      */
 	public function administracion_index() {
 		$this->Categoria->recursive = 0;
-		$this->set('categorias', $this->paginate());
+        $categorias = $this->paginate();
+        foreach( $categorias as &$cat ) {
+            $cat['Categoria']['ruta'] = $this->Categoria->getPath( intval( $cat['Categoria']['id_categoria'] ), array( 'nombre' ) );
+        }
+		$this->set( 'categorias', $categorias );
 	}
 
     /**
@@ -26,7 +32,7 @@ class CategoriasController extends PreguntaFrecuenteAppController {
      */
 	public function administracion_view($id = null) {
 		if (!$this->Categoria->exists($id)) {
-			throw new NotFoundException(__('Invalid categoria'));
+			throw new NotFoundException( "Categoría invalida" );
 		}
 		$options = array('conditions' => array('Categoria.' . $this->Categoria->primaryKey => $id));
 		$this->set('categoria', $this->Categoria->find('first', $options));
@@ -41,14 +47,14 @@ class CategoriasController extends PreguntaFrecuenteAppController {
 		if ($this->request->is('post')) {
 			$this->Categoria->create();
 			if ($this->Categoria->save($this->request->data)) {
-				$this->Session->setFlash(__('The categoria has been saved'), 'flash/success');
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash( "La categoría fue guardada correctamente", null, array( 'class' => 'success' ) );
+				$this->redirect( array( 'action' => 'index' ) );
 			} else {
-				$this->Session->setFlash(__('The categoria could not be saved. Please, try again.'), 'flash/error');
+				$this->Session->setFlash( 'La categoría no pudo ser guardada. Intente nuevamente.', null, array( 'class' => 'error' ) );
 			}
 		}
-		$padres = $this->Categoria->Padre->find('list');
-		$this->set(compact('padres'));
+		$parents = $this->Categoria->generateTreeList();
+		$this->set( compact( 'parents' ) );
 	}
 
     /**
@@ -73,8 +79,8 @@ class CategoriasController extends PreguntaFrecuenteAppController {
 			$options = array('conditions' => array('Categoria.' . $this->Categoria->primaryKey => $id));
 			$this->request->data = $this->Categoria->find('first', $options);
 		}
-		$padres = $this->Categoria->Padre->find('list');
-		$this->set(compact('padres'));
+		$parents = $this->Categoria->generateTreeList();
+        $this->set( compact( 'parents' ) );
 	}
 
     /**

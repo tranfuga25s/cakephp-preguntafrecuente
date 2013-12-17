@@ -4,6 +4,7 @@
 </script>
 <div id="accion">
     <?php echo $this->Html->link( 'Agregar nueva categoria', array('action' => 'add')); ?>
+    <?php echo $this->Html->link( 'Lista de preguntas frecuentes', array( 'controller' => 'pregunta_frecuente', 'action' => 'index' ) ); ?>
 </div>
 <br />
 <h2>Categorias de Preguntas frecuentes</h2>
@@ -13,7 +14,6 @@
             <!-- <th>Logo</th> -->
             <th><?php echo $this->Paginator->sort('id_categoria');?></th>
             <th><?php echo $this->Paginator->sort('nombre');?></th>
-            <th><?php echo $this->Paginator->sort('Padre');?></th>
             <th class="actions">Acciones</th>
     </tr>
     <?php
@@ -21,8 +21,11 @@
     foreach ( $categorias as $categoria ): ?>
     <tr>
         <td><?php echo h($categoria['Categoria']['id_categoria']); ?>&nbsp;</td>
-        <td><?php echo h($categoria['Categoria']['nombre']); ?>&nbsp;</td>
-        <td><?php echo h($categoria['Padre']['Categoria']['nombre']); ?>&nbsp;</td>
+        <td><?php $temp = array();
+        foreach( $categoria['Categoria']['ruta'] as $padre ) {
+            $temp[] = $padre['Categoria']['nombre'];   
+        } 
+        echo implode( ' - ', $temp ); ?>&nbsp;</td>
         <td class="actions">
             <?php echo $this->Html->link( 'Ver', array('action' => 'view', $categoria['Categoria']['id_categoria'] ) ); ?>
             <?php echo $this->Html->link( 'Editar', array('action' => 'edit', $categoria['Categoria']['id_categoria'])); ?>

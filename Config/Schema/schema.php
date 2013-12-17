@@ -41,7 +41,9 @@ class PreguntaFrecuenteSchema extends CakeSchema {
 	public $categorias = array(
 		'id_categoria' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
 		'nombre' => array('type' => 'text', 'null' => false, 'default' => null ),
-		'padre_id' => array( 'type' => 'integer', 'null' => false, 'default' => null),
+		'parent_id' => array( 'type' => 'integer', 'null' => true, 'default' => null),
+		'lft' => array( 'type' => 'integer', 'null' => false, 'default' => null ),
+		'rght' => array( 'type' => 'integer', 'null' => false, 'default' => null ),
 		'publicada' => array('type' => 'boolean', 'null' => false, 'default' => false),
 		'descripcion' => array('type' => 'text', 'null' => false, 'default' => null),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),

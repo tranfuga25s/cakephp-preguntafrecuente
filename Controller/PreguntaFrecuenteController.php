@@ -55,7 +55,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
     }
 
     public function administracion_add() {
-        $categorias = $this->Pregunta->Categoria->find('list');
+        $categorias = $this->Pregunta->Categoria->generateTreeList();
         $this->set( compact( 'categorias' ) );
     }
 }

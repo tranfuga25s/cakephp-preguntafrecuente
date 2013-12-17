@@ -4,6 +4,7 @@
 </script>
 <div id="accion">
     <?php echo $this->Html->link( 'Agregar nueva pregunta', array('action' => 'add')); ?>
+    <?php echo $this->Html->link( 'Categorías', array( 'controller' => 'categorias', 'action' => 'index' ) ); ?>
 </div>
 <br />
 <h2>Preguntas frecuentes</h2>
