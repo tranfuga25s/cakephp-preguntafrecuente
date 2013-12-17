@@ -5,28 +5,7 @@
  */
 class PreguntaFixture extends CakeTestFixture {
 
-    public $table = 'test_pregunta';
-    /**
-     * Fields
-     *
-     * @var array
-     */
-	public $fields = array(
-		'id_pregunta' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'pregunta' => array('type' => 'text', 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'charset' => 'utf8'),
-		'respuesta' => array('type' => 'text', 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'charset' => 'utf8'),
-		'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
-		'publicado' => array('type' => 'boolean', 'null' => false, 'default' => null),
-		'categoria_id' => array('type' => 'integer', 'null' => false, 'default' => null),
-		'leido' => array('type' => 'integer', 'null' => false, 'default' => '0'),
-		'util' => array('type' => 'integer', 'null' => false, 'default' => '0'),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id_pregunta', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_spanish_ci', 'engine' => 'InnoDB')
-	);
-
+    public $import = array( 'table' => 'pregunta', 'records' => true );
     /**
      * Records
      *
