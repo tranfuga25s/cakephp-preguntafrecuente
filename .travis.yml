@@ -5,7 +5,7 @@ php:
 
 before_script:
   - git clone git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp
-  - mv cakephp-preguntafrecuente ./app/Plugins/PreguntaFrecuente
+  - mv ../cakephp-preguntafrecuente ../cakephp/app/Plugins/PreguntaFrecuente
   - chmod -R 777 ../cakephp/app/tmp
   - sh -c "mysql -e 'CREATE DATABASE cakephp_test;'"
   - echo "<?php
@@ -19,6 +19,7 @@ before_script:
      'persistent' => false,
    );
    }" > ../cakephp/app/Config/database.php
+ - ../cakephp/app/Console/cake schema create --plugin PreguntaFrecuente
 
 script:
   - ./lib/Cake/Console/cake test PreguntaFrecuente AllTests --stderr
