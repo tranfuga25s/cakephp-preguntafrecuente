@@ -19,8 +19,8 @@ before_script:
      'host' => '',
      'persistent' => false,
    );
-   }" > ../cakephp/app/Config/database.php
-  - ../cakephp/app/Console/cake schema create --plugin PreguntaFrecuente
+   }" > cakephp/app/Config/database.php
+  - ./cakephp/app/Console/cake schema create --plugin PreguntaFrecuente
 
 script:
   - ./lib/Cake/Console/cake test PreguntaFrecuente AllTests --stderr
