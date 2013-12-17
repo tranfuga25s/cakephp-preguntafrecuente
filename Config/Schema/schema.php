@@ -1,5 +1,5 @@
 <?php 
-class AppSchema extends CakeSchema {
+class PreguntaFrecuenteSchema extends CakeSchema {
 
 	public function before($event = array()) {
 		return true;
@@ -47,7 +47,7 @@ class AppSchema extends CakeSchema {
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id_categoria', 'unique' => 1)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_spanish_ci', 'engine' => 'InnoDB')
 	);

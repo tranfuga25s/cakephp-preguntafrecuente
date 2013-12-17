@@ -8,12 +8,18 @@
 class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 	
 	public $components = array( 'RequestHandler' );
+    
+    public $uses = array( 'PreguntaFrecuente.Pregunta', 
+                          'PreguntaFrecuente.Categoria' );
 
 	/**
 	 * Muestra la pagina de inicio
 	 * @return void
 	 */
-	public function index() {}
+	public function index() {
+	    $categorias = $this->Pregunta->Categoria->find( 'list' );
+        $this->set( 'categorias', $categorias );
+	}
 	
 	/**
 	 * Devuelve un array con todos los elementos más comentados
@@ -21,7 +27,8 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 	 */
 	public function mascomentado() {
 		$this->autoRender = false;
-		return $this->PreguntaFrecuente->masComentado();
+		//return $this->Pregunta->masComentado();
+		return array();
 	}
 	
 	/***
@@ -30,7 +37,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 	 */
 	public function masleido() {
 		$this->autoRender = false;
-		return $this->PreguntaFrecuente->masLeido();
+		return $this->Pregunta->masLeido();
 	}
 	
 	/***
@@ -39,7 +46,16 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 	 */
 	public function masutil() {
 		$this->autoRender = false;
-		return $this->PreguntaFrecuente->masUtil();
+		return $this->Pregunta->masUtil();
 	} 
 	
+    
+    public function administracion_index() {
+        $this->set( 'preguntas', $this->paginate() );
+    }
+
+    public function administracion_add() {
+        $categorias = $this->Pregunta->Categoria->find('list');
+        $this->set( compact( 'categorias' ) );
+    }
 }
