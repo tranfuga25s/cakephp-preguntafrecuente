@@ -5,7 +5,7 @@
  */
 class PreguntaFixture extends CakeTestFixture {
 
-    public $import = array( 'table' => 'pregunta', 'records' => true );
+    public $import = array( 'model' => 'PreguntaFrecuente.Pregunta' );
     /**
      * Records
      *
