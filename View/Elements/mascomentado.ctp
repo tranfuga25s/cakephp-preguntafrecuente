@@ -15,6 +15,6 @@
 	 
 	 echo $this->Html->tag( 'li', $this->Html->link( $this->Text->truncate( $pregunta['Pregunta']['titulo'], 100 ),
 	 						 						array( 'controller' => 'pregunta_frecuente', 'action' => 'view', $pregunta['Pregunta']['id_pregunta'] ) ).
-	 						 	'tiene '.count( $pregunta['Pregunta']['Comentarios'] ).' comentarios' );
+	 						 	$this->Html->tag( 'span', count( $pregunta['Pregunta']['Comentarios'] ).' comentarios', array( 'class' => 'label' ) ) );
  } ?>
  </ul>

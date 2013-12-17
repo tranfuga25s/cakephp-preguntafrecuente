@@ -14,8 +14,8 @@
  foreach( $preguntas as $pregunta ) {
      
      echo $this->Html->tag( 'li', 
-                             $this->Html->link( $this->Text->truncate( $pregunta['Pregunta']['titulo'], 100 ),
+                             $this->Html->link( $this->Text->truncate( $pregunta['Pregunta']['pregunta'], 100 ),
                                                 array( 'controller' => 'pregunta_frecuente', 'action' => 'view', $pregunta['Pregunta']['id_pregunta'] ) ).
-                             'leido '.$pregunta['Pregunta']['leido'].' veces' );
+                             $this->Html->tag( 'span', 'Leida '.$pregunta['Pregunta']['leido'].' veces', array( 'class' => 'label' ) ) );
  } ?>    
  </ul>

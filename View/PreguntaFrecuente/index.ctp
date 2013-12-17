@@ -11,13 +11,11 @@
 	<div class="categorias span6">
 		<h4>Categorias</h4>
 		<ul class="nav nav-pills nav-stacked">
-		<?php foreach( $categorias as $categoria ) :
-        
+		<?php foreach( $categorias as $clave => $categoria ) :
             echo $this->Html->tag( 'li', 
-                $this->Html->link( $categoria['nombre'], 
-                                   array( 'plugin' => 'pregunta_frecuente', 'controller' => 'categoria', 'action' => 'view', $categoria['id_categoria'] )
-                                )
-            ); 
+                $this->Html->link( $categoria, 
+                                   array( 'plugin' => 'pregunta_frecuente', 'controller' => 'categoria', 'action' => 'view', $clave )
+                                ) ); 
 		endforeach; 
 		?>
 		</ul>

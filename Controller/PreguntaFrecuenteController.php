@@ -55,6 +55,14 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
     }
 
     public function administracion_add() {
+        if( $this->request->is( 'post' ) ) {
+            if( $this->Pregunta->save( $this->request->data ) ) {
+                $this->Session->correcto( 'La pregunta fue guardada correctamente' );
+                $this->redirect( array( 'action' => 'index' ) );
+            } else {
+                $this->Session->incorrecto( 'La pregunta no se pudo guardar' );
+            }
+        }
         $categorias = $this->Pregunta->Categoria->generateTreeList();
         $this->set( compact( 'categorias' ) );
     }
