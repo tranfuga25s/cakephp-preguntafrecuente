@@ -17,7 +17,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 	 * @return void
 	 */
 	public function index() {
-	    $categorias = $this->Pregunta->Categoria->find( 'list' );
+	    $categorias = $this->Pregunta->Categoria->find( 'list', array( 'conditions' => array( 'parent_id != ' => null ) ) );
         $this->set( 'categorias', $categorias );
 	}
 	
@@ -56,6 +56,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 
     public function administracion_add() {
         if( $this->request->is( 'post' ) ) {
+            $this->Pregunta->create();
             if( $this->Pregunta->save( $this->request->data ) ) {
                 $this->Session->correcto( 'La pregunta fue guardada correctamente' );
                 $this->redirect( array( 'action' => 'index' ) );
@@ -65,5 +66,25 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         }
         $categorias = $this->Pregunta->Categoria->generateTreeList();
         $this->set( compact( 'categorias' ) );
+    }
+    
+    public function administracion_edit( $id_pregunta = null ) {
+        if( $this->request->is( 'post' ) ) {
+            if( $this->Pregunta->save( $this->request->data ) ) {
+                $this->Session->correcto( 'La pregunta fue guardada correctamente' );
+                $this->redirect( array( 'action' => 'index' ) );
+            } else {
+                $this->Session->incorrecto( 'La pregunta no se pudo guardar' );
+            }
+        } else {
+            $this->Pregunta->id = $id_pregunta;
+            if( !$this->Pregunta->exists() ) {
+                throw new NotFoundException( "La pregunta no existe!" );
+            }
+            $this->request->data = $this->Pregunta->read( null, $id_pregunta );
+        }
+        $categorias = $this->Pregunta->Categoria->generateTreeList();
+        $this->set( compact( 'categorias' ) );
+        
     }
 }
