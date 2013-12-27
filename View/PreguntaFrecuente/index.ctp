@@ -14,7 +14,7 @@
 		<?php foreach( $categorias as $clave => $categoria ) :
             echo $this->Html->tag( 'li', 
                 $this->Html->link( $categoria, 
-                                   array( 'plugin' => 'pregunta_frecuente', 'controller' => 'categoria', 'action' => 'view', $clave )
+                                   array( 'plugin' => 'pregunta_frecuente', 'controller' => 'categorias', 'action' => 'view', $clave )
                                 ) ); 
 		endforeach; 
 		?>
