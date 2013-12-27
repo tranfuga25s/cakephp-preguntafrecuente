@@ -5,6 +5,8 @@
  * @version 1
  * @package PreguntaFrecuente
  ********************************************************************/
+ App::uses('PreguntaFrecuenteAppController', 'PreguntaFrecuente.Controller');
+ 
 class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 	
 	public $components = array( 'RequestHandler' );

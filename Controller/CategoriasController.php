@@ -47,10 +47,10 @@ class CategoriasController extends PreguntaFrecuenteAppController {
 		if ($this->request->is('post')) {
 			$this->Categoria->create();
 			if ($this->Categoria->save($this->request->data)) {
-				$this->Session->setFlash( "La categoría fue guardada correctamente", null, array( 'class' => 'success' ) );
+				$this->Session->correcto( "La categoría fue guardada correctamente" );
 				$this->redirect( array( 'action' => 'index' ) );
 			} else {
-				$this->Session->setFlash( 'La categoría no pudo ser guardada. Intente nuevamente.', null, array( 'class' => 'error' ) );
+				$this->Session->incorrecto( 'La categoría no pudo ser guardada. Intente nuevamente.' );
 			}
 		}
 		$parents = $this->Categoria->generateTreeList();
@@ -66,14 +66,14 @@ class CategoriasController extends PreguntaFrecuenteAppController {
      */
 	public function administracion_edit($id = null) {
 		if (!$this->Categoria->exists($id)) {
-			throw new NotFoundException(__('Invalid categoria'));
+			throw new NotFoundException( 'Categoría Invalida' );
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Categoria->save($this->request->data)) {
-				$this->Session->setFlash(__('The categoria has been saved'), 'flash/success');
+				$this->Session->correcto( 'La categoría fue guardada correctamente' );
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The categoria could not be saved. Please, try again.'), 'flash/error');
+				$this->Session->incorrecto( 'La categoría no pudo ser guardada. Intente nuevamente.');
 			}
 		} else {
 			$options = array('conditions' => array('Categoria.' . $this->Categoria->primaryKey => $id));

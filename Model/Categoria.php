@@ -32,7 +32,7 @@ class Categoria extends PreguntaFrecuenteAppModel {
      */
 	public $hasMany = array(
 		'Preguntum' => array(
-			'className' => 'Pregunta',
+			'className' => 'PreguntaFrecuente.Pregunta',
 			'foreignKey' => 'categoria_id',
 			'dependent' => false
 		)
