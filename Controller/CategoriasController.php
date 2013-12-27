@@ -8,6 +8,19 @@ App::uses('PreguntaFrecuenteAppController', 'PreguntaFrecuente.Controller');
 class CategoriasController extends PreguntaFrecuenteAppController {
     
     public $uses = array( 'PreguntaFrecuente.Categoria' );
+    
+    public function beforeFilter() {
+        $this->Auth->allow( array( 'view' ) );
+        parent::beforeFilter();
+    }
+    
+    public function view( $id_categoria = null ) {
+        $this->Categoria->id = $id_categoria;
+        if( !$this->Categoria->exists() ) {
+            throw new NotFoundException( "La categoría no existe" );
+        }
+        $this->set( 'categoria', $this->Categoria->read() );
+    }
 
     /**
      * administracion_index method

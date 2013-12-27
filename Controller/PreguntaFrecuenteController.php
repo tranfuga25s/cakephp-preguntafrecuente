@@ -22,6 +22,15 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 	    $categorias = $this->Pregunta->Categoria->find( 'list', array( 'conditions' => array( 'parent_id != ' => null ) ) );
         $this->set( 'categorias', $categorias );
 	}
+    
+    public function view( $id_pregunta = null ) {
+        $this->Pregunta->id = $id_pregunta;
+        if( !$this->Pregunta->exists() ) {
+            throw new NotFoundException( "La pregunta solicitada no existe" );
+        }
+        
+        $this->set( 'pregunta', $this->Pregunta->read() );
+    }
 	
 	/**
 	 * Devuelve un array con todos los elementos más comentados
@@ -74,7 +83,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         if( $this->request->is( 'post' ) ) {
             if( $this->Pregunta->save( $this->request->data ) ) {
                 $this->Session->correcto( 'La pregunta fue guardada correctamente' );
-                $this->redirect( array( 'action' => 'index' ) );
+                return $this->redirect( array( 'action' => 'index' ) );
             } else {
                 $this->Session->incorrecto( 'La pregunta no se pudo guardar' );
             }
