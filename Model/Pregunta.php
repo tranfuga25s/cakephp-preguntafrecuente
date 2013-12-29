@@ -20,10 +20,10 @@ class Pregunta extends PreguntaFrecuenteAppModel {
      * @var string
      */
 	public $displayField = 'pregunta';
-    
+
     /**
      * Nombre de la tabla
-     * 
+     *
      * @var string
      */
      public $useTable = 'pregunta';
@@ -117,7 +117,7 @@ class Pregunta extends PreguntaFrecuenteAppModel {
 			'foreignKey' => 'categoria_id'
 		)
 	);
-    
+
     public function masLeido() {
         return $this->find( 'all', array( 'order' => array( 'leido' => 'desc' ),
                                           'limit' => 3,
@@ -125,7 +125,7 @@ class Pregunta extends PreguntaFrecuenteAppModel {
                                           'recursive' => -1
         ));
     }
-    
+
     public function masUtil() {
         return $this->find( 'all', array( 'order' => array( 'util' => 'desc' ),
                                           'limit' => 3,
@@ -133,4 +133,25 @@ class Pregunta extends PreguntaFrecuenteAppModel {
                                           'recursive' => -1
         ));
     }
+
+    public function agregarLectura( $id_pregunta = null ) {
+        if( $id_pregunta == null ) {
+            if( $this->id == null ) {
+                return false;
+            }
+        } else {
+            $this->id = $id_pregunta;
+            if( !$this->exists() ) {
+                return;
+            }
+        }
+        $anterior = $this->field( 'leido' );
+        $nuevo = intval( $anterior ) + 1;
+        if( $this->saveField( 'leido', $nuevo ) ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
