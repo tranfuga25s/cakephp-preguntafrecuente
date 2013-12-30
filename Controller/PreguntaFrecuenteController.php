@@ -9,7 +9,7 @@
 
 class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 
-	public $components = array( 'RequestHandler', 'AuthComponent' );
+	public $components = array( 'RequestHandler', 'Auth' );
 
     public $uses = array( 'PreguntaFrecuente.Pregunta',
                           'PreguntaFrecuente.Categoria' );
