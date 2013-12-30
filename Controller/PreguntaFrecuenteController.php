@@ -14,10 +14,10 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
     public $uses = array( 'PreguntaFrecuente.Pregunta',
                           'PreguntaFrecuente.Categoria' );
 
-    public function beforeFilter() {
+    /*public function beforeFilter() {
         $this->Auth->allow( array( 'index', 'view', 'mascomentado', 'masleido', 'masutil' ) );
         parent::beforeFilter();
-    }
+    }*/
 
 	/**
 	 * Muestra la pagina de inicio
