@@ -9,7 +9,7 @@
 
 class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 
-	public $components = array( 'RequestHandler', 'Cookie' );
+	public $components = array( 'RequestHandler', 'Cookie', 'Auth' );
 
     public $uses = array( 'PreguntaFrecuente.Pregunta',
                           'PreguntaFrecuente.Categoria' );
@@ -37,6 +37,16 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 
         $this->set( 'pregunta', $this->Pregunta->read() );
         $this->Pregunta->agregarLectura();
+        if( $this->Cookie->check( 'PreguntaFrecuente' ) ) {
+            $preguntas = $this->Cookie->read('PreguntaFrecuente');
+            if( array_key_exists( intval( $id_pregunta ), array_flip( $preguntas ) ) ) {
+                $this->set( 'dio_util', true );
+            } else {
+                $this->set( 'dio_util', false );
+            }
+        } else {
+            $this->set( 'dio_util', false );
+        }
     }
 
 	/**
@@ -74,7 +84,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         }
         if( $this->Cookie->check( 'PreguntaFrecuente' ) ) {
             $preguntas = $this->Cookie->read( 'PreguntaFrecuente' );
-            if( !array_key_exists( $id_pregunta, array_flip( $preguntas ) ) ) {
+            if( !array_key_exists( $id_pregunta, array_flip( $preguntas ) ) {
                 $preguntas[] = intval( $id_pregunta );
                 $this->Cookie->write( 'PreguntaFrecuente', $preguntas );
                 $this->Pregunta->agregarUtil();

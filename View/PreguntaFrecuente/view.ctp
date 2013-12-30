@@ -28,10 +28,18 @@ $this->set( 'title_for_layout', $pregunta['Pregunta']['pregunta'] );
         <?php echo $this->element( 'comentario', array( 'pregunta_id' => $pregunta['Pregunta']['id_pregunta'] ) ); ?>
     </div>
     <div class="span5 well">
-        <?php echo $this->Html->link( $this->Html->tag( 'span', '', array( 'class' => 'icon icon-thumbs-up icon-white') ).' Me fue util',
-                                       array( 'controller' => 'pregunta_frecuente', 'action' => 'util', $pregunta['Pregunta']['id_pregunta'] ),
-                                       array( 'class' => 'btn btn-primary', 'escape' => false )
-              );
+        <?php
+              if( $dio_util == false ) {
+                  echo $this->Html->link( $this->Html->tag( 'span', '', array( 'class' => 'icon icon-thumbs-up icon-white') ).' Me fue util',
+                                           array( 'controller' => 'pregunta_frecuente', 'action' => 'util', $pregunta['Pregunta']['id_pregunta'] ),
+                                           array( 'class' => 'btn btn-primary', 'escape' => false )
+                  );
+              } else {
+                  echo $this->Html->link( $this->Html->tag( 'span', '', array( 'class' => 'icon icon-thumbs-up icon-white') ).' Me fue util',
+                                           array( 'controller' => 'pregunta_frecuente', 'action' => 'util', $pregunta['Pregunta']['id_pregunta'] ),
+                                           array( 'class' => 'btn btn-primary disabled', 'escape' => false )
+                  );
+              }
               echo $this->Html->link( $this->Html->tag( 'span', '', array( 'class' => 'icon icon-thumbs-down') ). 'Reportar',
                                       array( 'controller' => 'pregunta_frecuente', 'action' => 'reportar', $pregunta['Pregunta']['id_pregunta'] ),
                                       array( 'class' => 'btn', 'escape' => false )
