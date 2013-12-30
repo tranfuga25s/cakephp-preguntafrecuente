@@ -16,7 +16,7 @@ before_script:
      'database' => 'turnera',
      'host' => '0.0.0.0',
      'login' => 'travis',
-     'host' => '',
+     'prefix' => '',
      'persistent' => false,
    );
    public \$test = array(
@@ -24,7 +24,7 @@ before_script:
      'database' => 'turnera',
      'host' => '0.0.0.0',
      'login' => 'travis',
-     'host' => '',
+     'prefix' => '',
      'persistent' => false,
    );
    }" > cakephp/app/Config/database.php
