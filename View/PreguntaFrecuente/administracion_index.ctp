@@ -11,8 +11,8 @@
 <table cellpadding="0" cellspacing="0">
   <tbody>
     <tr>
-            <!-- <th>Logo</th> -->
             <th><?php echo $this->Paginator->sort('id_pregunta');?></th>
+            <th><?php echo $this->Paginator->sort('categoria_id'); ?></th>
             <th><?php echo $this->Paginator->sort('pregunta');?></th>
             <th><?php echo $this->Paginator->sort('respuesta');?></th>
             <th class="actions">Acciones</th>
@@ -21,7 +21,8 @@
     $i = 0;
     foreach ( $preguntas as $pregunta ): ?>
     <tr>
-        <td><?php echo h($pregunta['Pregunta']['id_pregunta']); ?>&nbsp;</td>
+        <td><?php echo h('#'.$pregunta['Pregunta']['id_pregunta']); ?>&nbsp;</td>
+        <td><?php echo $this->Html->link( $pregunta['Categoria']['nombre'], array( 'controller' => 'categorias', 'action' => 'view', $pregunta['Categoria']['id_categoria'] ) ); ?></td>
         <td><?php echo $this->Text->truncate($pregunta['Pregunta']['pregunta'], 50 ); ?>&nbsp;</td>
         <td><?php echo $this->Text->truncate($pregunta['Pregunta']['respuesta'], 50 ); ?>&nbsp;</td>
         <td class="actions">
