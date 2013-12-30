@@ -19,9 +19,17 @@ before_script:
      'host' => '',
      'persistent' => false,
    );
+   public \$test = array(
+     'datasource' => 'Database/Mysql',
+     'database' => 'turnera',
+     'host' => '0.0.0.0',
+     'login' => 'travis',
+     'host' => '',
+     'persistent' => false,
+   );
    }" > cakephp/app/Config/database.php
   - sh -c "mysql < cakephp/app/Plugin/PreguntaFrecuente/Config/Schema/schema.sql"
-  - echo "CakePlugin::load( 'PreguntaFrecuente' ); " > cakephp/app/Config/bootstrap.php
+  - echo "CakePlugin::load( 'PreguntaFrecuente' ); " >> cakephp/app/Config/bootstrap.php
 
 script:
   - ./cakephp/app/Console/cake test PreguntaFrecuente AllTests --stderr
