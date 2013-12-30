@@ -56,6 +56,20 @@ class PreguntaTest extends CakeTestCase {
         $this->assertEqual( $nuevo_leido, ( $cantidad_leido + 2 ), "No se actualizó correctamente la cantidad de lecturas" );
     }
 
+    public function testUtil() {
+        $id_pregunta = $this->Pregunta->find( 'first', array( 'recurisve' => -1 ) );
+        $this->assertArrayHasKey( 'Pregunta', $id_pregunta, "No existe la pregunta" );
+        $this->assertArrayHasKey( 'id_pregunta', $id_pregunta['Pregunta'], "No existe la pregunta" );
+        $cantidad_util = $id_pregunta['Pregunta']['util'];
+        $this->assertNotEqual( $this->Pregunta->agregarUtil(), true, "No debería de actualizase los valores si no hay un ID seteado" );
+        $this->assertEqual( $this->Pregunta->agregarUtil( $id_pregunta ), true, "No debería de devolver falso si se pasa un parametro" );
+        $this->Pregunta->id = $id_pregunta['Pregunta']['id_pregunta'];
+        $this->assertEqual( $this->Pregunta->agregarUtil(), true, "No debería devolver falso si está seteado el ID antes de actualizar lecturas" );
+        $nuevo_util = intval( $this->Pregunta->field( 'util' ) );
+        $this->assertNotEqual( $nuevo_util, $cantidad_util, "No se actualizo la cantidad de utiles" );
+        $this->assertEqual( $nuevo_util, ( $cantidad_util + 2 ), "No se actualizó correctamente la cantidad de utiles" );
+    }
+
     /**
      * tearDown method
      *

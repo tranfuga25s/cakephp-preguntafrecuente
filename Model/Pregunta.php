@@ -154,4 +154,23 @@ class Pregunta extends PreguntaFrecuenteAppModel {
         }
     }
 
+    public function agregarUtil( $id_pregunta = null ) {
+        if( $id_pregunta == null ) {
+            if( $this->id == null ) {
+                return false;
+            }
+        } else {
+            $this->id = $id_pregunta;
+            if( !$this->exists() ) {
+                return;
+            }
+        }
+        $anterior = $this->field( 'util' );
+        $nuevo = intval( $anterior ) + 1;
+        if( $this->saveField( 'util', $nuevo ) ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
