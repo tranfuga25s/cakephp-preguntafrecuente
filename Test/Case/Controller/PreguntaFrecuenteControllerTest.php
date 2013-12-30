@@ -53,7 +53,24 @@ class PreguntaFrecuenteControllerTest extends ControllerTestCase {
      *
      * @return void
      */
-	public function testUtil() {
+	public function testUtilNoCookie() {
+        $this->testAction('/pregunta_frecuente/pregunta_frecuente/util/1');
+        $this->assertEqual( $this->controller->Cookie->check( 'PreguntaFrecuente' ), true, "No se encontró el valor de la cookie" );
+        $this->assertInternalType( 'array', $this->controller->Cookie->read( 'PreguntaFrecuente'), "El valor guardado en la cookie no es un array" );
+        $this->assertEqual( array( 1 ), $this->controller->Cookie->read( 'PreguntaFrecuente' ), "El array  no coincide con el guardado" );
 	}
+
+    public function testUtilConCookie() {
+        $this->testAction('/pregunta_frecuente/pregunta_frecuente/util/1');
+        $this->testAction('/pregunta_frecuente/pregunta_frecuente/util/2');
+        $this->assertEqual( $this->controller->Cookie->read( 'PreguntaFrecuente' ), array( 1, 2 ), "El array  no coincide con el guardado 2" );
+    }
+
+    public function testUtilConCookieRepetido() {
+        $this->testAction('/pregunta_frecuente/pregunta_frecuente/util/1');
+        $this->testAction('/pregunta_frecuente/pregunta_frecuente/util/2');
+        $this->testAction('/pregunta_frecuente/pregunta_frecuente/util/2');
+        $this->assertEqual( $this->controller->Cookie->read( 'PreguntaFrecuente' ), array( 1, 2 ), "El array  no coincide con el guardado 2" );
+    }
 
 }

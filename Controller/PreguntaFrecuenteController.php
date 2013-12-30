@@ -9,15 +9,16 @@
 
 class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 
-	public $components = array( 'RequestHandler', 'Auth' );
+	public $components = array( 'RequestHandler', 'Cookie' );
 
     public $uses = array( 'PreguntaFrecuente.Pregunta',
                           'PreguntaFrecuente.Categoria' );
 
-    /*public function beforeFilter() {
-        $this->Auth->allow( array( 'index', 'view', 'mascomentado', 'masleido', 'masutil' ) );
+    public function beforeFilter() {
+        $this->Auth->allow( array( 'index', 'view', 'mascomentado', 'masleido', 'masutil', 'util' ) );
+        $this->Cookie->name = 'PreguntaFrecuente';
         parent::beforeFilter();
-    }*/
+    }
 
 	/**
 	 * Muestra la pagina de inicio
@@ -71,11 +72,21 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         if( !$this->Pregunta->exists() ) {
             throw new NotFoundException( 'La pregunta no existe!' );
         }
-
-        // Veo si no votó por esa pregunta ya
-        if( $this->Session->check( 'PreguntaFrecuente' ) ) {
-
+        if( $this->Cookie->check( 'PreguntaFrecuente' ) ) {
+            $preguntas = $this->Cookie->read( 'PreguntaFrecuente' );
+            if( !array_key_exists( $id_pregunta, array_flip( $preguntas ) ) ) {
+                $preguntas[] = intval( $id_pregunta );
+                $this->Cookie->write( 'PreguntaFrecuente', $preguntas );
+                $this->Pregunta->agregarUtil();
+            }
+        } else {
+            $this->Pregunta->agregarUtil();
+            $this->Cookie->write( array(
+                'PreguntaFrecuente' => array( intval( $id_pregunta ) )
+            ));
         }
+
+        return $this->redirect( array( 'action' => 'view', $id_pregunta ) );
     }
 
 
