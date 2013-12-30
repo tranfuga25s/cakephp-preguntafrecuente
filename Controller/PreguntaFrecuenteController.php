@@ -66,6 +66,18 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 		return $this->Pregunta->masUtil();
 	}
 
+    public function util( $id_pregunta = null ) {
+        $this->Pregunta->id = $id_pregunta;
+        if( !$this->Pregunta->exists() ) {
+            throw new NotFoundException( 'La pregunta no existe!' );
+        }
+
+        // Veo si no votó por esa pregunta ya
+        if( $this->Session->check( 'PreguntaFrecuente' ) ) {
+
+        }
+    }
+
 
     public function administracion_index() {
         $this->set( 'preguntas', $this->paginate() );
