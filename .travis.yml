@@ -8,19 +8,20 @@ before_script:
   - cd ..
   - mv cakephp-preguntafrecuente cakephp/app/Plugin/PreguntaFrecuente
   - chmod -R 777 cakephp/app/tmp
-  - sh -c "mysql -e 'CREATE DATABASE cakephp_test;'"
+  - sh -c "mysql -e 'CREATE DATABASE turnera;'"
   - echo "<?php
    class DATABASE_CONFIG {
    public \$default = array(
      'datasource' => 'Database/Mysql',
-     'database' => 'cakephp_test',
+     'database' => 'turnera',
      'host' => '0.0.0.0',
      'login' => 'travis',
      'host' => '',
      'persistent' => false,
    );
    }" > cakephp/app/Config/database.php
-  - ./cakephp/app/Console/cake schema create --plugin PreguntaFrecuente
+  - sh -c "mysql < cakephp/app/Plugin/PreguntaFrecuente/Config/Schema/schema.sql"
+  - echo "CakePlugin::load( 'PreguntaFrecuente' ); " > cakephp/app/Config/bootstrap.php
 
 script:
-  - ./lib/Cake/Console/cake test PreguntaFrecuente AllTests --stderr
+  - ./cakephp/app/Console/cake test PreguntaFrecuente AllTests --stderr
