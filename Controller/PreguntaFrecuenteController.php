@@ -84,7 +84,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         }
         if( $this->Cookie->check( 'PreguntaFrecuente' ) ) {
             $preguntas = $this->Cookie->read( 'PreguntaFrecuente' );
-            if( !array_key_exists( $id_pregunta, array_flip( $preguntas ) ) {
+            if( !array_key_exists( $id_pregunta, array_flip( $preguntas ) ) ) {
                 $preguntas[] = intval( $id_pregunta );
                 $this->Cookie->write( 'PreguntaFrecuente', $preguntas );
                 $this->Pregunta->agregarUtil();
