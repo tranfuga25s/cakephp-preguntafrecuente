@@ -53,6 +53,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         } else {
             $this->set( 'dio_util', false );
         }
+        $this->set( 'preguntas_similares', $this->Pregunta->getSimilares( $this->viewVars['pregunta']['Pregunta']['categoria_id'] ) );
     }
 
 	/**

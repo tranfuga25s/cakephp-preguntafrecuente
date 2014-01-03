@@ -70,6 +70,23 @@ class PreguntaTest extends CakeTestCase {
         $this->assertEqual( $nuevo_util, ( $cantidad_util + 2 ), "No se actualizó correctamente la cantidad de utiles" );
     }
 
+    public function testPreguntaSimilares() {
+
+        $id_pregunta = $this->Pregunta->find( 'first', array( 'recursive' => -1 ) );
+        $this->assertArrayHasKey( 'Pregunta', $id_pregunta, "No existe la pregunta" );
+        $this->assertArrayHasKey( 'id_pregunta', $id_pregunta['Pregunta'], "No existe la pregunta" );
+        $id_categoria = intval( $id_pregunta['Pregunta']['categoria_id'] );
+        $id_pregunta = intval( $id_pregunta['Pregunta']['id_pregunta'] );
+
+        $parecidas = $this->Pregunta->getSimilares( $id_categoria, $id_pregunta );
+        $this->assertNotEqual( 0, count( $parecidas ), "No se encontró ninguna pregunta" );
+        $this->assertArrayHasKey( 'Pregunta', $parecidas[0], "No se encontró el formato esperado" );
+        $this->assertNotEqual( $parecidas[0]['Pregunta']['id_pregunta'], $id_pregunta, "No se puede poner como parecida una pregunta igual a la original" );
+        $this->assertEqual( $this->Pregunta->getSimilares( $id_categoria ), false, "Si falta un parametro debe devolver falso" );
+        $this->assertEqual( $this->Pregunta->getSimilares( 0 ), false, "Si un paremetro es incorrecto debe devolver falso" );
+
+    }
+
     /**
      * tearDown method
      *

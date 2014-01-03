@@ -12,7 +12,7 @@ $this->set( 'title_for_layout', $pregunta['Pregunta']['pregunta'] );
     </div>
 </div>
 <div class="row-fluid">
-    <div class="span7 well">
+    <!-- <div class="span7 well">
         <h5>Comentarios</h5>
         <ul class="nav nav-pills nav-stacked">
         <?php
@@ -25,9 +25,10 @@ $this->set( 'title_for_layout', $pregunta['Pregunta']['pregunta'] );
         endif;
         ?>
         </ul>
-        <?php echo $this->element( 'comentario', array( 'pregunta_id' => $pregunta['Pregunta']['id_pregunta'] ) ); ?>
-    </div>
+        <?php //echo $this->element( 'comentario', array( 'pregunta_id' => $pregunta['Pregunta']['id_pregunta'] ) ); ?>
+    </div> -->
     <div class="span5 well">
+        <div class="btn-group">
         <?php
               if( $dio_util == false ) {
                   echo $this->Html->link( $this->Html->tag( 'span', '', array( 'class' => 'icon icon-thumbs-up icon-white') ).' Me fue util',
@@ -45,9 +46,22 @@ $this->set( 'title_for_layout', $pregunta['Pregunta']['pregunta'] );
                                       array( 'class' => 'btn', 'escape' => false )
               );
         ?>
+        </div>
+        <?php
+        if( isset( $preguntas_similares ) && $preguntas_similares != false && count( $preguntas_similares ) > 0 ) :
+        ?>
         <h5>Preguntas similares</h5>
         <ul class="nav nav-pills nav-stacked">
-            <li>Pregunta similar</li>
+            <?php
+            foreach( $preguntas_similares as $pregunta ) :
+                echo $this->Html->tag( 'li',
+                    $this->Html->tag( 'div', $pregunta['Pregunta']['pregunta'] )
+                );
+            endforeach;
+            ?>
         </ul>
+        <?php
+        endif;
+        ?>
     </div>
 </div>

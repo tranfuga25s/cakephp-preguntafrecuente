@@ -173,4 +173,19 @@ class Pregunta extends PreguntaFrecuenteAppModel {
             return false;
         }
     }
+
+    public function getSimilares( $id_categoria = null, $id_pregunta = null ) {
+        if( is_null( $id_categoria ) || is_null( $id_pregunta )
+           || $id_categoria <= 0 || $id_pregunta <= 0 ) {
+               return false;
+        }
+
+        return $this->find( 'all', array(
+                'conditions' => array( 'id_pregunta !=' => $id_pregunta, 'categoria_id' => $id_categoria ),
+                'recursive' => -1,
+                'fields' => array( 'id_pregunta', 'pregunta', 'leido' )
+            )
+        );
+
+    }
 }
