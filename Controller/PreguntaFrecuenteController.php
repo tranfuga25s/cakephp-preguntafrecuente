@@ -16,8 +16,14 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
 
     public function beforeFilter() {
         $this->Auth->allow( array( 'index', 'view', 'mascomentado', 'masleido', 'masutil', 'util' ) );
-        $this->Cookie->name = 'PreguntaFrecuente';
         parent::beforeFilter();
+        $this->Cookie->name = 'PreguntaFrecuente';
+        $this->Cookie->time = 3600;  // or '1 hour'
+        $this->Cookie->path = '/';
+        $this->Cookie->secure = false;  // i.e. only sent if using secure HTTPS
+        $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
+        $this->Cookie->httpOnly = false;
+
     }
 
 	/**
@@ -82,6 +88,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         if( !$this->Pregunta->exists() ) {
             throw new NotFoundException( 'La pregunta no existe!' );
         }
+        debug( $this->Cookie->check( 'PreguntaFrecuente' ) );
         if( $this->Cookie->check( 'PreguntaFrecuente' ) ) {
             $preguntas = $this->Cookie->read( 'PreguntaFrecuente' );
             if( !array_key_exists( $id_pregunta, array_flip( $preguntas ) ) ) {
