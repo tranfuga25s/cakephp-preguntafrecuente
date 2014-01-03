@@ -89,7 +89,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         if( !$this->Pregunta->exists() ) {
             throw new NotFoundException( 'La pregunta no existe!' );
         }
-        debug( $this->Cookie->check( 'PreguntaFrecuente' ) );
+        //debug( $this->Cookie->check( 'PreguntaFrecuente' ) );
         if( $this->Cookie->check( 'PreguntaFrecuente' ) ) {
             $preguntas = $this->Cookie->read( 'PreguntaFrecuente' );
             if( !array_key_exists( $id_pregunta, array_flip( $preguntas ) ) ) {
