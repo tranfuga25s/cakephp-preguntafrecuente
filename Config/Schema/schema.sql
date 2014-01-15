@@ -1,3 +1,4 @@
+USE `turnera`;
 DROP TABLE IF EXISTS `pregunta`;
 DROP TABLE IF EXISTS `comentarios`;
 DROP TABLE IF EXISTS `categorias`;
