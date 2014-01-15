@@ -15,7 +15,7 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
                           'PreguntaFrecuente.Categoria' );
 
     public function beforeFilter() {
-        $this->Auth->allow( array( 'index', 'view', 'mascomentado', 'masleido', 'masutil', 'util' ) );
+        $this->Auth->allow( array( 'index', 'view', 'mascomentado', 'masleido', 'masutil', 'util', 'buscar' ) );
         parent::beforeFilter();
         $this->Cookie->name = 'PreguntaFrecuente';
         $this->Cookie->time = 3600;  // or '1 hour'
@@ -107,7 +107,21 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
         return $this->redirect( array( 'action' => 'view', $id_pregunta ) );
     }
 
+    /*!
+     *
+     */
+    public function buscar() {
+        if( $this->request->is('post') ) {
+            $texto = $this->request->data['texto'];
+            $this->set( 'preguntas', $this->Pregunta->buscar( $texto ) );
+        } else {
+            throw new NotFoundException( 'Método no implementado: '.$this->request->method() );
+        }
+    }
 
+    /*!
+     *
+     */
     public function administracion_index() {
         $this->set( 'preguntas', $this->paginate() );
     }

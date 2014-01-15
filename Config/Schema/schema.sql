@@ -1,11 +1,9 @@
+DROP TABLE IF EXISTS `pregunta`;
+DROP TABLE IF EXISTS `comentarios`;
+DROP TABLE IF EXISTS `categorias`;
 
 
-DROP TABLE IF EXISTS `turnera`.`pregunta`;
-DROP TABLE IF EXISTS `turnera`.`comentarios`;
-DROP TABLE IF EXISTS `turnera`.`categorias`;
-
-
-CREATE TABLE `turnera`.`pregunta` (
+CREATE TABLE `pregunta` (
 	`id_pregunta` int(11) NOT NULL AUTO_INCREMENT,
 	`pregunta` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
 	`respuesta` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -18,7 +16,7 @@ CREATE TABLE `turnera`.`pregunta` (
 	COLLATE=utf8_spanish_ci,
 	ENGINE=InnoDB;
 
-CREATE TABLE `turnera`.`comentarios` (
+CREATE TABLE `comentarios` (
 	`id_comentario` int(11) NOT NULL AUTO_INCREMENT,
 	`pregunta_id` int(11) NOT NULL,
 	`usuario` text CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -29,7 +27,7 @@ CREATE TABLE `turnera`.`comentarios` (
 	COLLATE=utf8_spanish_ci,
 	ENGINE=InnoDB;
 
-CREATE TABLE `turnera`.`categorias` (
+CREATE TABLE `categorias` (
 	`id_categoria` int(11) NOT NULL AUTO_INCREMENT,
 	`nombre` text NOT NULL,
 	`parent_id` int(11) DEFAULT NULL,

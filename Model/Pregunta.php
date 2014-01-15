@@ -188,4 +188,14 @@ class Pregunta extends PreguntaFrecuenteAppModel {
         );
 
     }
+
+    public function buscar( $texto = null ) {
+        if( is_null( $texto ) ) { return array(); }
+        return $this->find( 'all', array(
+            'conditions' => array( 'OR' => array( 'pregunta LIKE ' => "%".$texto."%",
+                                                  'respuesta LIKE' => "%".$texto."%" ) ),
+            'recursive' => -1,
+            'fields' => array( 'id_pregunta', 'pregunta', 'leido' )
+        ) );
+    }
 }
