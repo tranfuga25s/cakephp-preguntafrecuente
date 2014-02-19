@@ -9,6 +9,15 @@ Las preguntas frecuentes se agrupan en un arbol de categorías.
 
 Cada pregunta frecuente tiene la pregunta como titulo y respuesta editable mediante un editor común.
 Cada pregunta posee además un sistema de votación para marcar cuando una pregunta fue "util", y para reportar una pregunta como defectuosa o incorrecta.
-Se agregará soporte para comentarios.
+
+TODO
+====
+
+* Soporte para comentarios.
+* Busqueda en nombre de categorías
+* Agregar TOC
+
+EXTRA
+=====
 
 Utiliza elementos del plugin Utils de CakeDC [https://github.com/CakeDC/utils] para las busquedas y filtrados.
