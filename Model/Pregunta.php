@@ -191,6 +191,7 @@ class Pregunta extends PreguntaFrecuenteAppModel {
 
     public function buscar( $texto = null ) {
         if( is_null( $texto ) ) { return array(); }
+        if( empty( $texto ) ) { return array(); }
         return $this->find( 'all', array(
             'conditions' => array( 'OR' => array( 'pregunta LIKE ' => "%".$texto."%",
                                                   'respuesta LIKE' => "%".$texto."%" ) ),

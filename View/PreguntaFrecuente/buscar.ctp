@@ -3,7 +3,7 @@ $this->set( 'title_for_layout', "Resultados de busqueda en ayuda" );
 ?>
 <div class="row-fluid">
     <div class="span12">
-        <h4>Resultado de la busqueda</h4>
+        <h4>Resultado de la busqueda de <?php echo $texto; ?></h4>
         <?php if( count( $preguntas ) > 0 ) : ?>
         <ul class="nav nav-pills nav-stacked">
         <?php foreach( $preguntas as $pregunta ) :

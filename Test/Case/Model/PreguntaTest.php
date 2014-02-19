@@ -71,7 +71,6 @@ class PreguntaTest extends CakeTestCase {
     }
 
     public function testPreguntaSimilares() {
-
         $id_pregunta = $this->Pregunta->find( 'first', array( 'recursive' => -1 ) );
         $this->assertArrayHasKey( 'Pregunta', $id_pregunta, "No existe la pregunta" );
         $this->assertArrayHasKey( 'id_pregunta', $id_pregunta['Pregunta'], "No existe la pregunta" );
@@ -85,6 +84,12 @@ class PreguntaTest extends CakeTestCase {
         $this->assertEqual( $this->Pregunta->getSimilares( $id_categoria ), false, "Si falta un parametro debe devolver falso" );
         $this->assertEqual( $this->Pregunta->getSimilares( 0 ), false, "Si un paremetro es incorrecto debe devolver falso" );
 
+    }
+
+    public function testBuscar() {
+        $this->assertEqual( count( $this->Pregunta->buscar( '' ) ), 0, "Resultados de busqueda vacíos debe devolver vacio" );
+        $this->assertGreaterThan( 0, count( $this->Pregunta->buscar( 'lorem' ) ), "Resultados de busqueda de Lorem deben de ser > 0" );
+        $this->assertGreaterThan( 0, count( $this->Pregunta->buscar( 'amet,' ) ), "Resultados de busqueda de amet, deben de ser > 0" );
     }
 
     /**
