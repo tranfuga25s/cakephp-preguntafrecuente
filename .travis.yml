@@ -6,8 +6,7 @@ php:
 before_script:
   - git clone git://github.com/cakephp/cakephp ../cakephp
   - cd ..
-  - ls -1
-  - cp cakephp-preguntafrecuente cakephp/app/Plugin/PreguntaFrecuente
+  - cp -R cakephp-preguntafrecuente cakephp/app/Plugin/PreguntaFrecuente
   - chmod -R 777 cakephp/app/tmp
   - sh -c "mysql -e 'CREATE DATABASE turnera;'"
   - echo "<?php
