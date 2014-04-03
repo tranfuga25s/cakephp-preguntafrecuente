@@ -35,12 +35,12 @@ before_script:
   - cp cakephp/app/Plugin/PreguntaFrecuente/composer.json composer.json
   - cp cakephp/app/Plugin/PreguntaFrecuente/.coveralls.yml .coveralls.yml
   - composer install --dev
-  - mkdir -p build/logs    
+  - mkdir -p build/logs
 
 script:
   - ./cakephp/app/Console/cake test PreguntaFrecuente AllTests --stderr --coverage-clover build/logs/clover-plugin.xml
-  
+
 
 after_script:
-  - cd cakephp-viewed/
+  - cd cakephp-preguntafrecuente/
   - php ../vendor/bin/coveralls -v
