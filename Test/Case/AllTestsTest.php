@@ -3,6 +3,8 @@
  * Clase para ejecutar todos los test
  */
 class AllTests extends PHPUnit_Framework_TestSuite {
+	
+    protected $coverageSetup = false;
 
     /**
      * Suite define the tests for this suite
