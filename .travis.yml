@@ -4,6 +4,7 @@ php:
   - 5.3
 
 before_script:
+  - ls -1
   - git clone git://github.com/cakephp/cakephp ../cakephp
   - cd ..
   - cp cakephp-preguntafrecuente cakephp/app/Plugin/PreguntaFrecuente
