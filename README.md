@@ -2,6 +2,7 @@ cakephp-preguntafrecuente
 =========================
 
 [![Build Status](https://travis-ci.org/tranfuga25s/cakephp-preguntafrecuente.png?branch=master)](https://travis-ci.org/tranfuga25s/cakephp-preguntafrecuente)
+[![Coverage Status](https://coveralls.io/repos/tranfuga25s/cakephp-preguntafrecuente/badge.png)](https://coveralls.io/r/tranfuga25s/cakephp-preguntafrecuente)
 
 Plugin para ofrecer un sistema de preguntas frecuentes en una página cualquiera.
 
