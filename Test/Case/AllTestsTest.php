@@ -27,8 +27,8 @@ class AllTests extends PHPUnit_Framework_TestSuite {
 				$coverage->setProcessUncoveredFilesFromWhitelist(true);
  
 				$coverageFilter = $coverage->filter();
-				//$coverageFilter->addDirectoryToBlacklist(APP . DS . 'Test');
-				$coverageFilter->addDirectoryToBlacklist(CORE_PATH);
+				$coverageFilter->addDirectoryToBlacklist( APP . DS . 'Test' );
+				$coverageFilter->addDirectoryToBlacklist( CORE_PATH );
 			}
 			$this->coverageSetup = true;
 		}
