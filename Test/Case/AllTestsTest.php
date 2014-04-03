@@ -11,9 +11,27 @@ class AllTests extends PHPUnit_Framework_TestSuite {
      */
 	public static function suite() {
 		$suite = new PHPUnit_Framework_TestSuite('All Tests');
-        $suite->addTestFile( ROOT. DS . APP_DIR . DS . 'Plugin' . DS . 'PreguntaFrecuente'. DS . 'Test'. DS. 'Case'. DS .'Controller' . DS . 'ControllersTest.php' );
-        $suite->addTestFile( ROOT. DS . APP_DIR . DS . 'Plugin' . DS . 'PreguntaFrecuente'. DS . 'Test'. DS. 'Case'. DS .'Model' . DS . 'AllModelsTest.php' );
-        //$suite->addTestFile( ROOT. DS . APP_DIR . DS . 'Plugin' . DS . 'PreguntaFrecuente'. DS . 'Test'. DS. 'Case'. DS . 'View' . DS . 'AllViewsTest.php');
+        	$suite->addTestFile( ROOT. DS . APP_DIR . DS . 'Plugin' . DS . 'PreguntaFrecuente'. DS . 'Test'. DS. 'Case'. DS .'Controller' . DS . 'ControllersTest.php' );
+		$suite->addTestFile( ROOT. DS . APP_DIR . DS . 'Plugin' . DS . 'PreguntaFrecuente'. DS . 'Test'. DS. 'Case'. DS .'Model' . DS . 'AllModelsTest.php' );
+        	//$suite->addTestFile( ROOT. DS . APP_DIR . DS . 'Plugin' . DS . 'PreguntaFrecuente'. DS . 'Test'. DS. 'Case'. DS . 'View' . DS . 'AllViewsTest.php');
 		return $suite;
+	}
+	
+	public function run(PHPUnit_Framework_TestResult $result = NULL, $filter = FALSE, array $groups = array(), array $excludeGroups = array(), $processIsolation = FALSE) {
+		if ($result === NULL) {
+			$result = $this->createResult();
+		}
+		if (!$this->coverageSetup) {
+			$coverage = $result->getCodeCoverage();
+			if ($coverage) { // If the CodeCoverage is not installed or disabled
+				$coverage->setProcessUncoveredFilesFromWhitelist(true);
+ 
+				$coverageFilter = $coverage->filter();
+				//$coverageFilter->addDirectoryToBlacklist(APP . DS . 'Test');
+				$coverageFilter->addDirectoryToBlacklist(CORE_PATH);
+			}
+			$this->coverageSetup = true;
+		}
+		return parent::run($result, $filter, $groups, $excludeGroups, $processIsolation);
 	}
 }
