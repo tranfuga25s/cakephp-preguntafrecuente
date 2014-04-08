@@ -100,4 +100,21 @@ class PreguntaFrecuenteControllerTest extends ControllerTestCase {
         }
     }
 
+    /**
+     * Test para verificar la devolucion del sistema de preguntas más utiles
+     */
+    public function testMasLeidas() {
+        $respuesta = $this->testAction( '/pregunta_frecuente/pregunta_frecuente/masutiles', array( 'return' => 'result') );
+        $this->assertInternalType( 'array', $respuesta, "El formato de devolución no es un array" );
+        $this->assertNotEquals( count( $respuesta ), 0, "No debería devolver elementos vacios" );
+        $anterior = $respuesta[0]['Pregunta']['util'];
+        foreach( $respuesta as $pregunta ) {
+            $this->assertArrayHasKey( 'Pregunta', $pregunta, "El formato devuleto no contiene pregunta" );
+            $this->assertArrayHasKey( 'util', $pregunta['Pregunta'], "Falta el campo de util" );
+            $this->assertArrayHasKey( 'pregunta', $pregunta['Pregunta'], "Falta el campo de pregunta" );
+            $this->assertArrayHasKey( 'id_pregunta', $pregunta['Pregunta'], "Falta el campo de id_pregunta" );
+            $this->assertLessThanOrEqual( $anterior, intval( $pregunta['Pregunta']['util'] ), "Valor menor al anterior" );
+            $anterior = intval( $pregunta['Pregunta']['util']);
+        }
+    }
 }

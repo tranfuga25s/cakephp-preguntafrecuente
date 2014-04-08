@@ -22,3 +22,5 @@ EXTRA
 =====
 
 Utiliza elementos del plugin Utils de CakeDC [https://github.com/CakeDC/utils] para las busquedas y filtrados.
+
+Versiones de PHP testeadas: >= 5.3
