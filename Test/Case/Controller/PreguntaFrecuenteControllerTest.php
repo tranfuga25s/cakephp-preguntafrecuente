@@ -15,9 +15,7 @@ class PreguntaFrecuenteControllerTest extends ControllerTestCase {
      */
     public $fixtures = array(
         'plugin.pregunta_frecuente.pregunta',
-        'plugin.pregunta_frecuente.categoria',
-        'app.usuario',
-        'plugin.AuditLog.audit'
+        'plugin.pregunta_frecuente.categoria'
     );
 
     /**
