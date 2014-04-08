@@ -103,7 +103,7 @@ class PreguntaFrecuenteControllerTest extends ControllerTestCase {
     /**
      * Test para verificar la devolucion del sistema de preguntas más utiles
      */
-    public function testMasLeidas() {
+    public function testMasUtiles() {
         $respuesta = $this->testAction( '/pregunta_frecuente/pregunta_frecuente/masutiles', array( 'return' => 'result') );
         $this->assertInternalType( 'array', $respuesta, "El formato de devolución no es un array" );
         $this->assertNotEquals( count( $respuesta ), 0, "No debería devolver elementos vacios" );
