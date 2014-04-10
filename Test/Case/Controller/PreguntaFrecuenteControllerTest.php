@@ -117,4 +117,30 @@ class PreguntaFrecuenteControllerTest extends ControllerTestCase {
             $anterior = intval( $pregunta['Pregunta']['util']);
         }
     }
+    
+    /**
+     * @expectedException NotFoundException
+     */
+    public function testBusquedaSinDatos() {
+        $this->testAction( '/pregunta_frecuente/pregunta_frecuente/buscar' );
+    }
+    
+    /**
+     * @expectedException NotFoundException
+     */
+    public function testBusquedaGet() {
+        $this->testAction( '/pregunta_frecuente/pregunta_frecuente/buscar', array( 'method' => 'get' ) );
+    }
+    
+    /**
+     * 
+     */
+    public function testBusquedaPost() {
+        $data = array( 'texto' => 'test' );
+        $this->testAction( '/pregunta_frecuente/pregunta_frecuente/buscar', array( 'data' => $data, 'method' => 'post' ) );
+        $this->assertInternalType( 'array', $this->vars['preguntas'], "Formato incorrecto de variable preguntas" );
+        $this->assertInternalType( 'string', $this->vars['texto'], "Formato incorrecto de variable texto" );
+    }
+    
+    
 }

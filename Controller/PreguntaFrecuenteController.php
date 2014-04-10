@@ -125,9 +125,13 @@ class PreguntaFrecuenteController extends PreguntaFrecuenteAppController {
      */
     public function buscar() {
         if ($this->request->is('post')) {
-            $texto = $this->request->data['texto'];
-            $this->set('preguntas', $this->Pregunta->buscar($texto));
-            $this->set('texto', $texto);
+            if(array_key_exists( "texto", $this->request->data ) ) {
+                $texto = $this->request->data['texto'];
+                $this->set('preguntas', $this->Pregunta->buscar($texto));
+                $this->set('texto', $texto);
+            } else {
+                throw new NotFoundException( "Ningún texto para buscar" );
+            }
         } else {
             throw new NotFoundException('Método no implementado: ' . $this->request->method());
         }
