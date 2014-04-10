@@ -13,14 +13,14 @@ class Categoria extends PreguntaFrecuenteAppModel {
      *
      * @var string
      */
-	public $primaryKey = 'id_categoria';
+    public $primaryKey = 'id_categoria';
 
     /**
      * Display field
      *
      * @var string
      */
-	public $displayField = 'nombre';
+    public $displayField = 'nombre';
     
     
     public $actsAs = array( 'Tree' );

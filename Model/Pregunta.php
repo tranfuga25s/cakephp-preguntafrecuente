@@ -12,14 +12,14 @@ class Pregunta extends PreguntaFrecuenteAppModel {
      *
      * @var string
      */
-	public $primaryKey = 'id_pregunta';
+    public $primaryKey = 'id_pregunta';
 
     /**
      * Display field
      *
      * @var string
      */
-	public $displayField = 'pregunta';
+    public $displayField = 'pregunta';
 
     /**
      * Nombre de la tabla
@@ -27,6 +27,8 @@ class Pregunta extends PreguntaFrecuenteAppModel {
      * @var string
      */
      public $useTable = 'pregunta';
+     
+     public $actsAs = array( 'Containable' );
 
     /**
      * Reglas de validacion
@@ -193,10 +195,12 @@ class Pregunta extends PreguntaFrecuenteAppModel {
         if( is_null( $texto ) ) { return array(); }
         if( empty( $texto ) ) { return array(); }
         return $this->find( 'all', array(
-            'conditions' => array( 'OR' => array( 'pregunta LIKE ' => "%".$texto."%",
-                                                  'respuesta LIKE' => "%".$texto."%" ) ),
-            'recursive' => -1,
-            'fields' => array( 'id_pregunta', 'pregunta', 'leido' )
+            'conditions' => array( 'OR' => array( 'Pregunta.pregunta LIKE ' => "%".$texto."%",
+                                                  'Pregunta.respuesta LIKE' => "%".$texto."%",
+                                                  'Categoria.nombre LIKE ' => '%'.$texto.'%', 
+                                                  'Categoria.descripcion LIKE' => '%'.$texto.'%') ),
+            'fields' => array( 'id_pregunta', 'pregunta', 'leido' ),
+            'contain' => array( 'Categoria' )
         ) );
     }
 }

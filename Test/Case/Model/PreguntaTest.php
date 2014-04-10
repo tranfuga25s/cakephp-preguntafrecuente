@@ -91,6 +91,11 @@ class PreguntaTest extends CakeTestCase {
         $this->assertGreaterThan( 0, count( $this->Pregunta->buscar( 'lorem' ) ), "Resultados de busqueda de Lorem deben de ser > 0" );
         $this->assertGreaterThan( 0, count( $this->Pregunta->buscar( 'amet,' ) ), "Resultados de busqueda de amet, deben de ser > 0" );
     }
+    
+    public function testBuscarNombreCategoria() {
+        $resultado = $this->Pregunta->buscar("Categoria");
+        $this->assertGreaterThan( 0, count( $resultado ), "Resultados de busqueda vacios" );
+    }
 
     /**
      * tearDown method
