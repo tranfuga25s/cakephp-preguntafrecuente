@@ -7,7 +7,7 @@ App::uses('PreguntaFrecuenteController', 'PreguntaFrecuente.Controller');
  *
  */
 class PreguntaFrecuenteControllerTest extends ControllerTestCase {
-
+    
     /**
      * Fixtures
      *
